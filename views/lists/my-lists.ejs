@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Lists</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <%- include("../partials/navbar") %>
+
+    <section class="section">
+
+        <div class="container">
+
+            <div class="is-flex
+                        is-justify-content-space-between
+                        is-align-items-center mb-5">
+
+                <h1 class="title">My Lists</h1>
+
+                <a href="/lists/create"
+                   class="button is-primary">
+                    + Create List
+                </a>
+
+            </div>
+
+            <% if (lists.length === 0) { %>
+
+                <div class="notification is-info is-light">
+                    You haven't created any lists yet.
+                </div>
+
+            <% } else { %>
+
+                <div class="columns is-multiline">
+
+                    <% lists.forEach(list => { %>
+
+                        <div class="column
+                                    is-one-third-desktop
+                                    is-half-tablet">
+
+                            <div class="card">
+
+                                <div class="card-content">
+
+                                    <p class="title is-4">
+                                        <%= list.list_name %>
+                                    </p>
+
+                                    <p class="subtitle is-6">
+                                        Template:
+                                        <%= list.template_name %>
+                                    </p>
+
+                                    <p class="is-size-7 has-text-grey">
+                                        Created:
+                                        <%= new Date(
+                                            list.created_at
+                                        ).toLocaleDateString() %>
+                                    </p>
+
+                                </div>
+
+                                <footer class="card-footer">
+
+                                    <a
+                                        href="/lists/<%= list.list_id %>"
+                                        class="card-footer-item">
+                                        View Entries
+                                    </a>
+
+                                </footer>
+
+                            </div>
+
+                        </div>
+
+                    <% }); %>
+
+                </div>
+
+            <% } %>
+
+        </div>
+
+    </section>
+
+</body>
+</html>

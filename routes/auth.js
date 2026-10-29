@@ -255,7 +255,7 @@ router.post("/login", async (req, res) => {
                     });
 
                 }
-                res.redirect("/content/create");
+                res.redirect("/templates/create");
             });
 
         });

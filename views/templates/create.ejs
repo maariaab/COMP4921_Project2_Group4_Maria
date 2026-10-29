@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create Template</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <%- include("../partials/navbar") %>
+
+    <section class="section">
+        <div class="container" style="max-width: 850px;">
+
+            <h1 class="title">Create List Template</h1>
+
+            <p class="subtitle">
+                Define the fields for your reusable template.
+            </p>
+
+            <div id="form-error"
+                 class="notification is-danger is-hidden"
+                 role="alert"></div>
+
+            <form id="template-form">
+
+                <div class="box">
+
+                    <div class="field">
+                        <label class="label">Template Name</label>
+                        <div class="control">
+                            <input
+                                id="template-name"
+                                class="input"
+                                type="text"
+                                maxlength="100"
+                                placeholder="e.g. Contact"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Description</label>
+                        <div class="control">
+                            <textarea
+                                id="template-description"
+                                class="textarea"
+                                placeholder="Optional description"
+                            ></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+                <h2 class="title is-4">Template Fields</h2>
+
+                <div id="fields-container"></div>
+
+                <button
+                    type="button"
+                    id="add-field"
+                    class="button is-info is-light">
+                    + Add Field
+                </button>
+
+                <hr>
+
+                <button
+                    type="submit"
+                    id="save-template"
+                    class="button is-primary is-large">
+                    Save Template
+                </button>
+
+            </form>
+
+        </div>
+    </section>
+
+    <script src="/js/template-builder.js"></script>
+</body>
+</html>

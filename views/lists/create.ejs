@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create List</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <%- include("../partials/navbar") %>
+
+    <section class="section">
+        <div class="container" style="max-width: 800px;">
+
+            <h1 class="title">Create List</h1>
+
+            <p class="subtitle">
+                Create a new list using an existing template.
+            </p>
+
+            <% if (templates.length === 0) { %>
+
+                <div class="notification is-warning">
+                    You don't have any templates yet.
+                    Create a template before creating a list.
+                </div>
+
+                <a href="/templates/create"
+                   class="button is-primary">
+                    Create Template
+                </a>
+
+            <% } else { %>
+
+                <form action="/lists/create" method="POST">
+
+                    <div class="box">
+
+                        <div class="field">
+                            <label class="label">List Name</label>
+
+                            <div class="control">
+                                <input
+                                    class="input"
+                                    type="text"
+                                    name="list_name"
+                                    maxlength="100"
+                                    placeholder="e.g. Office Appointments"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Select Template</label>
+
+                            <div class="control">
+                                <div class="select is-fullwidth">
+
+                                    <select name="template_id" required>
+
+                                        <option value="">
+                                            Choose a template
+                                        </option>
+
+                                        <% templates.forEach(template => { %>
+
+                                            <option
+                                                value="<%= template.template_id %>"
+                                                <%= String(selectedTemplateId) ===
+                                                    String(template.template_id)
+                                                    ? "selected" : "" %>>
+                                                <%= template.template_name %>
+                                            </option>
+
+                                        <% }); %>
+
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field mt-5">
+
+                            <button
+                                type="submit"
+                                class="button is-primary is-large">
+                                Create List
+                            </button>
+
+                            <a href="/lists/my"
+                               class="button is-light is-large">
+                                Cancel
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            <% } %>
+
+        </div>
+    </section>
+
+</body>
+</html>

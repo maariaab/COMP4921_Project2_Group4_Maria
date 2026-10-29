@@ -8,6 +8,8 @@ const MongoStore = connectMongo.MongoStore || connectMongo.default || connectMon
 
 const db_utils = include("database/db_utils");
 const db_setup = include("database/create_tables");
+const templatesRouter = require('./routes/templates');
+const listsRouter = require("./routes/lists");
 
 const authRouter = include("routes/auth");
 
@@ -55,6 +57,9 @@ app.use(
   })
 );
 
+app.use(express.json({ limit: "100kb" }));
+app.use(express.urlencoded({ extended: true }));
+
 
 app.use((req, res, next) => {
     res.locals.loggedIn = !!req.session.userId;
@@ -64,11 +69,19 @@ app.use((req, res, next) => {
 
 app.locals.expireTime = expireTime;
 
+app.use("/", authRouter);
+app.use('/templates', templatesRouter);
+app.use("/lists", listsRouter);
+
 app.get('/', (req, res) => {
-     res.render("signup");
+     res.render("index");
 });
 
-app.use("/", authRouter);
+app.use((req, res) => {
+    res.status(404).render("404");
+
+});
+
 
 //Start server
 async function startServer() {
